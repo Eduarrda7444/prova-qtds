@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEEP MCPF</title>
+    <link rel="icon" type="image/x-icon" href="Logo.svg">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            600: '#03805E',
+                            400: '#F49650',
+                            300: '#1D3853',
+                            200: '#F2FAFE',
+                            
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .nav-link.active {
+            color: #03805E;
+            font-weight: 600;
+        }
+        .project-card {
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        /* Animação do menu mobile */
+        #mobile-menu[aria-expanded="true"] {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Ícone do menu mobile */
+        .menu-open #mobile-menu-button svg {
+            display: none;
+        }
+        
+        .menu-open #mobile-menu-button:after {
+            content: '×';
+            font-size: 1.5rem; /* text-2xl */
+            line-height: 1; /* leading-none */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white font-sans transition-colors duration-200">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-900 fixed w-full z-50 shadow-sm">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#home" class="flex items-center">
+                        <img src="coruja.svg" class="h-9 w-9" alt="Logo" />
+                    </a>
+                </div>
+
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Início</a>
+                    <a href="#eixos" class="nav-link text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Eixos Profissionalizantes</a>
+                    <a href="#beneficios" class="nav-link text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Benefícios</a>
+                    <a href="#contact" class="nav-link text-gray-700 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contato</a>
+                </div>
+
+                <!-- Botões direita -->
+                <div class="flex items-center gap-4">
+                    <!-- Toggle de Tema -->
+                    <button id="theme-toggle" type="button" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg id="theme-toggle-dark-icon" class="w-6 h-6 text-gray-800 dark:text-gray-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-6 h-6 text-gray-800 dark:text-gray-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Botão Mobile -->
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="h-6 w-6 text-gray-800 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="hidden md:hidden">
+                <div class="pt-2 pb-4 space-y-1">
+                    <a href="#home" class="nav-link block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-400 dark:hover:bg-gray-800">Inícios</a>
+                    <a href="#eixos" class="nav-link block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-400 dark:hover:bg-gray-800">Eixos Profissionalizantes</a>
+                    <a href="#beneficios" class="nav-link block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-400 dark:hover:bg-gray-800">Benefícios</a>
+                    <a href="#contact" class="nav-link block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-400 dark:hover:bg-gray-800">Contato</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-16 bg-white dark:bg-gray-900">
+        <div class="max-w-screen-xl px-4 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-6">
+                <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+                    Formando Profissionais para o
+                    <span class="text-primary-400">Futuro</span>
+                </h1>
+                <p class="mb-6 font-light text-gray-600 md:text-lg lg:text-xl dark:text-gray-300">
+                    Na Maria Célia, capacitamos jovens em múltiplos eixos profissionais, preparando-os para os desafios do mercado de trabalho e do mundo acadêmico
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#eixos" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-primary-600 rounded-lg hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 transition-colors">
+                        Conheça Nossos Eixos
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 lg:flex lg:justify-end px-8 flex justify-center">
+                <img src="hero.png" class="w-500 h-500 rounded-lg max-lg:max-w-md">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Eixos Profissionalizantes -->
+    <section id="eixos" class="bg-white dark:bg-gray-900 py-16 px-4">
+        <div class="max-w-screen-xl mx-auto">
+            <h2 class="text-3xl font-extrabold mb-8 dark:text-white text-center">Nossos Eixos de Formação Técnica</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Curso 1 -->
+                <div class="project-card bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <div class="h-60 overflow-hidden bg-gray-200 flex items-center justify-center ml-0 mr-0">
+                        <img src="gestao.jpg" alt="gestao" class="w-410 h-62 rounded-t-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">Gestão e Negócios</h3>
+                        <h5 class="font-semibold mb-2 dark:text-white">Administração, Comércio e Finanças.</h5>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Formação voltada às práticas gerenciais, planejamento estratégico e gestão de recursos em diferentes setores do mercado.</p>
+                    </div>
+                </div>
+                
+                <!-- Curso 2 -->
+                <div class="project-card bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <div class="h-60 overflow-hidden bg-gray-200 flex items-center justify-center ml-0 mr-0">
+                        <img src="tec.jpg" alt="tecnologia" class="w-400 h-62 rounded-t-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">Informação e Comunicação</h3>
+                        <h5 class="font-semibold mb-2 dark:text-white">Desenvolvimento de Sistemas e Redes de Computadores.</h5>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Capacitação em programação, gestão de dados, infraestrutura de redes e soluções tecnológicas para o mundo conectado.</p>
+                    </div>
+                </div>
+                
+                <!-- Curso 3 -->
+                <div class="project-card bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <div class="h-60 overflow-hidden bg-gray-200 flex items-center justify-center ml-0 mr-0">
+                        <img src="agroo.jpg" alt="agro" class="w-400 h-62 rounded-t-lg">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 dark:text-white">Recursos Naturais</h3>
+                        <h5 class="font-semibold mb-2 dark:text-white">Agronegócio e Fruticultura.</h5>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Foco em técnicas de produção agrícola, gestão de cadeias produtivas e práticas sustentáveis de cultivo.</p>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- Seção benefécios -->
+    <section id="beneficios" class="bg-white dark:bg-gray-900 py-16 px-4">
+        <div class="max-w-screen-xl mx-auto">
+            <h2 class="text-3xl font-extrabold mb-8 dark:text-white text-center">Por que Escolher a EEEP Professora Maria Célia Falcão?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="project-card bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <div class="p-6">                        
+                        
+                        <div class="flex items-center">
+                            <i class="ri-building-line mr-2 mb-2 text-2xl"></i>
+                            <h3 class="text-xl font-bold mb-2 dark:text-white">Infraestrutura Moderna</h3>
+                        </div>
+                            
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Laboratórios equipados para prática em áreas de TI, Gestão e Agroindústria.
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <div class="p-6">                        
+                        
+                        <div class="flex items-center">
+                            <i class="ri-question-line mr-2 mb-2 text-2xl"></i>
+                            <h3 class="text-xl font-bold mb-2 dark:text-white">Suporte Acadêmico</h3>
+                        </div>
+                            
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Acompanhamento individualizado, reforço pedagógico e orientação profissional.
+                        </p>
+                    </div>
+                </div> 
+                <div class="project-card bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <div class="p-6">                        
+                        
+                        <div class="flex items-center">
+                            <i class="ri-graduation-cap-line mr-2 mb-2 text-2xl"></i>
+                            <h3 class="text-xl font-bold mb-2 dark:text-white">Projetos Extracurriculares</h3>
+                        </div>
+                            
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Iniciação científica, feiras de empreendedorismo e atividades de extensão comunitária.
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <div class="p-6">                        
+                        
+                        <div class="flex items-center">
+                            <i class="ri-infinity-line mr-2 mb-2 text-2xl"></i>
+                            <h3 class="text-xl font-bold mb-2 dark:text-white">Conexões Profissionais</h3>
+                        </div>
+                            
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Parcerias com empresas e universidades, possibilitando estágios e visitas técnicas.
+                        </p>
+                    </div>
+                </div>  
+
+
+            </div>
+
+            
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <footer id="contact" class="bg-white dark:bg-gray-900 rounded-lg shadow-sm">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8 flex flex-col items-center">
+            <h2 class="text-3xl font-extrabold mb-8 dark:text-white text-center">Fale Conosco</h2>
+            
+            <div class="w-full flex justify-center">
+                <div class="max-w-2xl w-full">
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 text-center mx-auto max-w-lg">
+                        Quer saber mais sobre os cursos, matrículas ou nossa infraestrutura?<br>
+                        Preencha o formulário abaixo e retornaremos em breve.
+                    </p>
+                    
+                    <div class="mx-auto max-w-md w-full">
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">Nome</label>
+                                <input type="text" id="name" placeholder="Maria Silva" class="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">Email</label>
+                                <input type="email" id="email" placeholder="seuemail@exemplo.com" class="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" required>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">Mensagem</label>
+                                <textarea id="message" rows="4" placeholder="Descreva sua dúvida aqui..." class="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors">
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-8 border-gray-200 dark:border-gray-700 w-full max-w-3xl mx-auto">
+            
+            <div class="text-center w-full">
+                <div class="flex justify-center items-center gap-2">
+                    <img src="Logo.svg" class="h-5 w-5" alt="Logo"/>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">© 2024 <a href="#" class="hover:underline text-primary-600 dark:text-primary-400">EEEP Professora Maria Célia Falcão.</a> Todos os direitos reservados.</span>
+                </div>
+                <div class="flex mt-4 justify-center">
+                    <a href="#" target="_blank" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <p>Regulamento Interno</p>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <p>Termos de Uso</p>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <p>Portal do Aluno</p>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <p>Portal da SEDUC</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        // Sistema de tema dark/light
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+            
+            // Verifica o tema atual ao carregar a página
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                // Tema escuro está ativo
+                document.documentElement.classList.add('dark');
+                themeToggleLightIcon.classList.remove('hidden');
+                themeToggleDarkIcon.classList.add('hidden');
+            } else {
+                // Tema claro está ativo
+                document.documentElement.classList.remove('dark');
+                themeToggleLightIcon.classList.add('hidden');
+                themeToggleDarkIcon.classList.remove('hidden');
+            }
+            
+            // Alterna entre os temas quando o botão é clicado
+            themeToggleBtn.addEventListener('click', function() {
+                // Alterna os ícones
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+                
+                // Se estiver definido no localStorage
+                if (localStorage.getItem('color-theme')) {
+                    // Se for claro, aplica escuro
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    // Se não estiver definido no localStorage
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+            });
+            
+            // Navegação ativa
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 300)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Fecha o menu mobile ao clicar em um item
+            const navbarToggle = document.querySelector('[data-collapse-toggle="navbar-default"]');
+            const navbarMenu = document.getElementById('navbar-default');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navbarToggle.setAttribute('aria-expanded', 'false');
+                    navbarMenu.classList.add('hidden');
+                });
+            });
+        });
+
+        // Inicializa o carrossel de certificados
+        $(document).ready(function(){
+            $('.certificates-carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let menuOpen = false;
+
+        mobileMenuButton.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenuButton.setAttribute('aria-expanded', menuOpen);
+            mobileMenuButton.parentElement.parentElement.classList.toggle('menu-open');
+            mobileMenu.classList.toggle('hidden');
+            
+            if(menuOpen) {
+                mobileMenu.style.transform = 'scaleY(1)';
+            } else {
+                mobileMenu.style.transform = 'scaleY(0)';
+            }
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if(menuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenuButton.click();
+            }
+        });
+
+        // Fechar menu ao rolar
+        window.addEventListener('scroll', () => {
+            if(menuOpen) mobileMenuButton.click();
+        });
+    </script>
+</body>
+</html>
